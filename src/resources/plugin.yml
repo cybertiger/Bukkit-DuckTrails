@@ -1,0 +1,58 @@
+name: "DuckTrails"
+version: "${version}-${project.build.number}"
+main: "org.cyberiantiger.minecraft.ducktrails.Main"
+commands:
+  ducktrails:
+    description: Leave an epic trail wherever you go.
+    usage: |
+        /<command> list    - List available trails.
+        /<command> off     - Disable your trail.
+        /<command> <trail> - Enable the specified trail.
+    aliases:
+            - dt
+            - ducktrail
+permissions:
+  ducktrails.trail.*:
+    default: op
+    description: Allows usage of all trails.
+    children:
+      ducktrails.trail.hearts: true
+      ducktrails.trail.flame: true
+      ducktrails.trail.ruby: true
+      ducktrails.trail.emerald: true
+      ducktrails.trail.saphire: true
+      ducktrails.trail.topaz: true
+      ducktrails.trail.diamond: true
+      ducktrails.trail.amethyst: true
+      ducktrails.trail.opal: true
+      ducktrails.trail.nyan: true
+  ducktrails.trail.hearts:
+    default: op
+    description: Allows usage of the hearts trail.
+  ducktrails.trail.flame:
+    default: op
+    description: Allows usage of the flame trail.
+  ducktrails.trail.ruby:
+    default: op
+    description: Allows usage of the ruby trail.
+  ducktrails.trail.emerald:
+    default: op
+    description: Allows usage of the emerald trail.
+  ducktrails.trail.saphire:
+    default: op
+    description: Allows usage of the saphire trail.
+  ducktrails.trail.topaz:
+    default: op
+    description: Allows usage of the topaz trail.
+  ducktrails.trail.diamond:
+    default: op
+    description: Allows usage of the diamond trail.
+  ducktrails.trail.amethyst:
+    default: op
+    description: Allows usage of the amethyst trail.
+  ducktrails.trail.opal:
+    default: op
+    description: Allows usage of the opal trail.
+  ducktrails.trail.opal:
+    default: op
+    description: Allows usage of the nyan trail.
