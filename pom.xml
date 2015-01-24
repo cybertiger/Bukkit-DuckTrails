@@ -9,8 +9,8 @@
   </properties>
   <scm>
     <url>https://github.com/cybertiger/Bukkit-InstantReset/</url>
-    <connection>scm:git:git://github.com/cybertiger/Bukkit-CrazyWake.git</connection>
-    <developerConnection>scm:git:git@github.com:cybertiger/Bukkit-CrazyWake.git</developerConnection>
+    <connection>scm:git:git://github.com/cybertiger/Bukkit-DuckTrails.git</connection>
+    <developerConnection>scm:git:git@github.com:cybertiger/Bukkit-DuckTrails.git</developerConnection>
   </scm>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -25,8 +25,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
     </plugins>
