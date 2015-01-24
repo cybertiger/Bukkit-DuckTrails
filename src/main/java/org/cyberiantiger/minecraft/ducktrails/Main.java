@@ -43,7 +43,7 @@ public class Main extends JavaPlugin implements Listener {
     }
     private Timer timer;
     private MusicRunnable timerTask;
-    private Map<Player, EffectHandler> effectHandlers = new WeakHashMap<>();
+    private Map<Player, EffectHandler> effectHandlers = new WeakHashMap<Player, EffectHandler>();
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
@@ -90,7 +90,7 @@ public class Main extends JavaPlugin implements Listener {
             sender.sendMessage("You will now leave no trail.");
             effectHandlers.remove(player);
         } else if ("list".equals(args[0])) {
-            List<Trails> effects = new ArrayList<>(Trails.values().length);
+            List<Trails> effects = new ArrayList<Trails>(Trails.values().length);
             for (Trails trail : Trails.values()) {
                 if (player.hasPermission(trail.getPermission())) {
                     effects.add(trail);
