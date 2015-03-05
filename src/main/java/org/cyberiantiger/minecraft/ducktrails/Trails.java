@@ -63,6 +63,10 @@ public enum Trails {
         public EffectHandler createHandler(Player player) {
             return new NyanEffectHandler(Effect.FIREWORKS_SPARK);
         }
+    },
+    PFUDOR("ducktrails.trail.pfudor", "Leave a pink trail behind you like a Pink Fluffy Unicorn!") {
+        public EffectHandler createHandler(Player player) { return new PFUDOREffectHandler(Effect.POTION_SWIRL);
+        }
     };
     
     private final String permission;

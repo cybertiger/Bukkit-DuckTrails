@@ -196,6 +196,60 @@ public abstract class MusicalEffectHandler extends EffectHandler {
                 C_SHARP4,
             };
 
+
+    private static final Note[] PFUDOR_MELODY =
+            new Note[] {
+                    C5, // Bar 1
+                    null,
+                    A4,
+                    C5,
+                    A4,
+                    G4,
+                    null,
+                    F4,
+                    D4,
+                    F4,
+                    G4,
+                    C5,
+                    null,
+                    C4,
+                    null,
+                    null,
+                    C5, // Bar 2
+                    null,
+                    A4,
+                    C5,
+                    A4,
+                    G4,
+                    null,
+                    F4,
+                    D4,
+                    F4,
+                    G4,
+                    C5,
+                    null,
+                    C4,
+                    null,
+                    null
+            };
+
+    public static final Track PFUDOR_MELODY_TRACK = new Track(Sound.NOTE_PIANO) {
+        @Override
+        public Note getNote(int offset) {
+            // LOOP to 3rd Bar (16 notes per bar)
+            if (offset >= PFUDOR_MELODY.length) {
+                offset -= 16;
+                offset %= PFUDOR_MELODY.length - 16;
+                offset += 16;
+            }
+            return PFUDOR_MELODY[offset];
+        }
+        @Override
+        public float getVolume(int offset) {
+            return 1f;
+        }
+    };
+
     public static final Track NYAN_CAT_MELODY_TRACK = new Track(Sound.NOTE_PIANO) {
         @Override
         public Note getNote(int offset) {
@@ -214,7 +268,9 @@ public abstract class MusicalEffectHandler extends EffectHandler {
         }
     };
 
-    public static class NyanEffectHandler extends MusicalEffectHandler {
+
+
+       public static class NyanEffectHandler extends MusicalEffectHandler {
         private final Effect effect;
 
         public NyanEffectHandler(Effect effect) {
@@ -236,6 +292,33 @@ public abstract class MusicalEffectHandler extends EffectHandler {
             }
         }
     }
+
+
+    public static class PFUDOREffectHandler extends MusicalEffectHandler {
+        private final Effect effect;
+        private float hue = 0f;
+
+        public PFUDOREffectHandler(Effect effect) {
+            super(new Track[] {PFUDOR_MELODY_TRACK});
+            this.effect = effect;
+        }
+
+        @Override
+        public void showEffect(Server server, Player player, Location from, Location to) {
+            super.showEffect(server, player, from, to);
+            int argb =  java.awt.Color.HSBtoRGB(hue, 81f, 70f);
+            float r = ((argb >> 16) & 0xff) / 255f;
+            float g = ((argb >> 8) & 0xff) / 255f;
+            float b = (argb & 0xff) / 255f;
+            r = r == 0f ? 0.001f : r;
+            sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 0);
+            hue = hue + 0.01f;
+            hue = hue >= 1f ? 0f : hue;
+        }
+    }
+
+
+
 
     private static final long RESET_AFTER = 400000000L; // 0.4s
     private final Track[] track;

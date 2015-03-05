@@ -5,9 +5,9 @@ commands:
   ducktrails:
     description: Leave an epic trail wherever you go.
     usage: |
-        /<command> list    - List available trails.
-        /<command> off     - Disable your trail.
-        /<command> <trail> - Enable the specified trail.
+        /dt list    - List available trails.
+        /dt off     - Disable your trail.
+        /dt <trail> - Enable the specified trail.
     aliases:
             - dt
             - ducktrail
@@ -26,6 +26,7 @@ permissions:
       ducktrails.trail.amethyst: true
       ducktrails.trail.opal: true
       ducktrails.trail.nyan: true
+      ducktrails.trail.pfudor: true
   ducktrails.trail.hearts:
     default: op
     description: Allows usage of the hearts trail.
@@ -53,6 +54,9 @@ permissions:
   ducktrails.trail.opal:
     default: op
     description: Allows usage of the opal trail.
-  ducktrails.trail.opal:
+  ducktrails.trail.nyan:
     default: op
     description: Allows usage of the nyan trail.
+  ducktrails.trail.pfudor:
+    default: op
+    description: Allows usage of the pink fluffy unicorn trail.
