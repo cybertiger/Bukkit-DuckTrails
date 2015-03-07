@@ -14,6 +14,7 @@ import static org.cyberiantiger.minecraft.ducktrails.MusicalEffectHandler.*;
  * @author antony
  */
 public enum Trails {
+
     FLAME("ducktrails.trail.flame", "Leave a trail of flames") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.FLAME, 0f, 0f, 0f, 0.02f, 1);
@@ -65,10 +66,10 @@ public enum Trails {
         }
     },
     PFUDOR("ducktrails.trail.pfudor", "Leave a pink trail behind you like a Pink Fluffy Unicorn!") {
-        public EffectHandler createHandler(Player player) { return new PFUDOREffectHandler(Effect.POTION_SWIRL);
+        public EffectHandler createHandler(Player player) {
+            return new PFUDOREffectHandler(Effect.COLOURED_DUST);
         }
     };
-    
     private final String permission;
     private final String description;
 
@@ -86,5 +87,4 @@ public enum Trails {
     }
 
     public abstract EffectHandler createHandler(Player player);
-    
 }
