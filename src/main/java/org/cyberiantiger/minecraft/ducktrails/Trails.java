@@ -62,12 +62,17 @@ public enum Trails {
     },
     NYAN("ducktrails.trail.nyan", "Leave a rainbow behind you like a Nyan Cat!") {
         public EffectHandler createHandler(Player player) {
-            return new NyanEffectHandler(Effect.FIREWORKS_SPARK);
+            return new NyanEffectHandler(Effect.COLOURED_DUST);
         }
     },
     PFUDOR("ducktrails.trail.pfudor", "Leave a pink trail behind you like a Pink Fluffy Unicorn!") {
         public EffectHandler createHandler(Player player) {
             return new PFUDOREffectHandler(Effect.COLOURED_DUST);
+        }
+    },
+    DUCKTALE("ducktrails.trail.ducktale", "Leave a quackingly good duck tales trail!") {
+        public EffectHandler createHandler(Player player) {
+            return new DuckTalesEffectHandler(Effect.FIREWORKS_SPARK);
         }
     };
     private final String permission;

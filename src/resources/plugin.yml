@@ -27,6 +27,7 @@ permissions:
       ducktrails.trail.opal: true
       ducktrails.trail.nyan: true
       ducktrails.trail.pfudor: true
+      ducktarils.trail.ducktale: true
   ducktrails.trail.hearts:
     default: op
     description: Allows usage of the hearts trail.
@@ -60,3 +61,6 @@ permissions:
   ducktrails.trail.pfudor:
     default: op
     description: Allows usage of the pink fluffy unicorn trail.
+  ducktrails.trail.ducktale:
+    default: op
+    description: Allows usage of the duck tale trail.

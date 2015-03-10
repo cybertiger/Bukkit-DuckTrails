@@ -32,9 +32,20 @@ public enum Note {
     D5,
     D_SHARP5,
     E5,
-    E_SHARP5,
     F5,
-    F_SHARP5;
+    F_SHARP5,
+    G5,
+    G_SHARP5,
+    A5,
+    A_SHARP5,
+    B5,
+    C6,
+    C_SHARP6,
+    D6,
+    D_SHARP6,
+    E6,
+    F6,
+    F_SHARP6;
 
     private float pitch;
 
