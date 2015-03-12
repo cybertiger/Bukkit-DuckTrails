@@ -85,7 +85,13 @@ public enum Trails {
         public EffectHandler createHandler(Player player) {
             return new DuckTalesEffectHandler(Effect.FIREWORKS_SPARK);
         }
+    },
+    DRAGONBORN("ducktrails.trail.dragonborn", "Leave a dragonborn themed trail!") {
+        public EffectHandler createHandler(Player player) {
+            return new DragonbornEffectHandler(Effect.COLOURED_DUST);
+        }
     };
+
     private final String permission;
     private final String description;
 
