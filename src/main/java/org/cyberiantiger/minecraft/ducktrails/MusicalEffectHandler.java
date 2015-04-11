@@ -1139,14 +1139,15 @@ public abstract class MusicalEffectHandler extends EffectHandler {
         @Override
         public void showEffect(Server server, Player player, Location from, Location to) {
             super.showEffect(server, player, from, to);
+            Location toCopy = to.clone();
             for (int i = 0; i < 20; i++) {
                 int argb = java.awt.Color.HSBtoRGB(i / 20.0f, 1f, 1f);
                 float r = ((argb >> 16) & 0xff) / 255f;
                 float g = ((argb >> 8) & 0xff) / 255f;
                 float b = (argb & 0xff) / 255f;
                 r = r == 0f ? 0.001f : r;
-                sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 0);
-                to.setY(to.getY() + 2 / 20d);
+                sendEffect(server, player, effect, toCopy, r, g, b, 1f, 256f, 0);
+                toCopy.setY(toCopy.getY() + 2 / 20d);
             }
         }
     }
