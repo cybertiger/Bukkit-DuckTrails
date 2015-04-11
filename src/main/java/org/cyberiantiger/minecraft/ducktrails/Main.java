@@ -58,8 +58,8 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
-        Location from = e.getFrom().clone();
-        Location to = e.getTo().clone();
+        Location from = e.getFrom();
+        Location to = e.getTo();
         // Ignore events where the player didn't move.
         if (from.getX() == to.getX() && from.getZ() == to.getZ() && from.getY() == to.getY()) {
             return;
@@ -67,7 +67,7 @@ public class Main extends JavaPlugin implements Listener {
         Player player = e.getPlayer();
         EffectHandler effectHandler = effectHandlers.get(player);
         if (effectHandler != null) {
-            effectHandler.showEffect(getServer(), player, from, to);
+            effectHandler.showEffect(getServer(), player, from.clone(), to.clone());
         }
     }
 
