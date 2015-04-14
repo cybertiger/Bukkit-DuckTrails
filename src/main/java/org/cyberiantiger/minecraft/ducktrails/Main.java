@@ -32,9 +32,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Properties;
+import java.util.SortedSet;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeSet;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
 import org.bukkit.ChatColor;
@@ -248,6 +251,34 @@ public class Main extends JavaPlugin implements Listener {
             }
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        String startsWith;
+        if (args.length == 0) {
+            startsWith = "";
+        } else if(args.length == 1) {
+            startsWith = args[0].toLowerCase();
+        } else {
+            return Collections.EMPTY_LIST;
+        }
+        List<String> completions = new ArrayList<String>();
+        if (sender instanceof Player) {
+            for (Map.Entry<String, Trail> e : trailNames.entrySet()) {
+                if (e.getKey().startsWith(startsWith) && sender.hasPermission(e.getValue().getPermission())) {
+                    completions.add(e.getKey());
+                }
+            }
+            if ("list".startsWith(startsWith)) 
+                completions.add("list");
+            if ("off".startsWith(startsWith))
+                completions.add("off");
+        }
+        if ("reload".startsWith(startsWith) && sender.hasPermission("ducktrails.reload")) 
+            completions.add("reload");
+        Collections.sort(completions);
+        return completions;
     }
 
     public String translate(String key, String... args) {
