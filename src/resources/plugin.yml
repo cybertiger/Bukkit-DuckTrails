@@ -21,10 +21,20 @@ commands:
         /dt list    - List available trails.
         /dt off     - Disable your trail.
         /dt <trail> - Enable the specified trail.
+        /dt reload  - Reload ducktrail's settings.
     aliases:
             - dt
             - ducktrail
 permissions:
+  ducktrails.*:
+    default: op
+    descripton: All ducktrails permissions.
+    children:
+      ducktrails.reload: true
+      ducktrails.trail.*: true
+  ducktrails.reload:
+    default: op
+    description: Allows reloading ducktrails.
   ducktrails.trail.*:
     default: op
     description: Allows usage of all trails.
@@ -33,14 +43,14 @@ permissions:
       ducktrails.trail.flame: true
       ducktrails.trail.ruby: true
       ducktrails.trail.emerald: true
-      ducktrails.trail.saphire: true
+      ducktrails.trail.sapphire: true
       ducktrails.trail.topaz: true
       ducktrails.trail.diamond: true
       ducktrails.trail.amethyst: true
       ducktrails.trail.opal: true
       ducktrails.trail.nyan: true
       ducktrails.trail.pfudor: true
-      ducktrails.trail.ducktale: true
+      ducktrails.trail.ducktales: true
       ducktrails.trail.dragonborn: true
   ducktrails.trail.hearts:
     default: op
@@ -54,9 +64,9 @@ permissions:
   ducktrails.trail.emerald:
     default: op
     description: Allows usage of the emerald trail.
-  ducktrails.trail.saphire:
+  ducktrails.trail.sapphire:
     default: op
-    description: Allows usage of the saphire trail.
+    description: Allows usage of the sapphire trail.
   ducktrails.trail.topaz:
     default: op
     description: Allows usage of the topaz trail.
@@ -75,9 +85,9 @@ permissions:
   ducktrails.trail.pfudor:
     default: op
     description: Allows usage of the pink fluffy unicorn trail.
-  ducktrails.trail.ducktale:
+  ducktrails.trail.ducktales:
     default: op
-    description: Allows usage of the duck tale trail.
+    description: Allows usage of the ducktales trail.
   ducktrails.trail.dragonborn:
     default: op
     description: Allows usage of the dragonborn trail.

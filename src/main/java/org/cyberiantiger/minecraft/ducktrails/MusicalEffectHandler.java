@@ -1007,8 +1007,8 @@ public abstract class MusicalEffectHandler extends EffectHandler {
             }
         }
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
-            super.showEffect(server, player, from, to);
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
+            super.showEffectInternal(server, player, from, to);
             Vector z = to.toVector().subtract(from.toVector());
             double movement = z.length();
             rotate += movement / 2; // rotate effects 360 degrees
@@ -1074,8 +1074,8 @@ public abstract class MusicalEffectHandler extends EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
-            super.showEffect(server, player, from, to);
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
+            super.showEffectInternal(server, player, from, to);
             Vector z = to.toVector().subtract(from.toVector());
             double movement = z.length();
             rotate += movement / 4; // rotate effects 360 degrees
@@ -1137,8 +1137,8 @@ public abstract class MusicalEffectHandler extends EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
-            super.showEffect(server, player, from, to);
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
+            super.showEffectInternal(server, player, from, to);
             for (int i = 0; i < 20; i++) {
                 int argb = java.awt.Color.HSBtoRGB(i / 20.0f, 1f, 1f);
                 float r = ((argb >> 16) & 0xff) / 255f;
@@ -1162,8 +1162,8 @@ public abstract class MusicalEffectHandler extends EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
-            super.showEffect(server, player, from, to);
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
+            super.showEffectInternal(server, player, from, to);
             Vector forwards = from.toVector().subtract(to.toVector());
             double movement = forwards.length();
             forwards.multiply(1 / movement);
@@ -1218,7 +1218,7 @@ public abstract class MusicalEffectHandler extends EffectHandler {
         this.track = track;
     }
 
-    public void showEffect(Server server, Player player, Location from, Location to) {
+    protected void showEffectInternal(Server server, Player player, Location from, Location to) {
         lastMove.set(System.nanoTime());
     }
 
@@ -1231,12 +1231,13 @@ public abstract class MusicalEffectHandler extends EffectHandler {
     }
 
     public void playNext(Server server, Player player) {
-        for (Track t : track) {
-            t.playNote(player.getLocation(), trackOffset);
+        Location location = getLastLocation();
+        if (location != null) {
+            for (Track t : track) {
+                t.playNote(location, trackOffset);
+            }
         }
         trackOffset++;
-
-
     }
 
     private static abstract class Track {

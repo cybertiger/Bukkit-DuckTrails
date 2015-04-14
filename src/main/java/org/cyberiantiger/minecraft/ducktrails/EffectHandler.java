@@ -15,6 +15,7 @@
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
+import java.util.concurrent.atomic.AtomicReference;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -51,7 +52,7 @@ public abstract class EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
             sendEffect(server, player, effect, to, dx, dy, dz, v, 256f, count, id, data);
         }
     }
@@ -66,7 +67,7 @@ public abstract class EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
             int argb =  java.awt.Color.HSBtoRGB(hue, 1f, 1f);
             float r = ((argb >> 16) & 0xff) / 255f;
             float g = ((argb >> 8) & 0xff) / 255f;
@@ -77,8 +78,19 @@ public abstract class EffectHandler {
             hue = hue >= 1f ? 0f : hue;
         }
     }
+    
+    private AtomicReference<Location> lastLocation = new AtomicReference<Location>(null);
 
-    public abstract void showEffect(Server server, Player player, Location from, Location to);
+    public Location getLastLocation() {
+        return lastLocation.get();
+    }
+
+    protected abstract void showEffectInternal(Server server, Player player, Location from, Location to);
+
+    public final void showEffect(Server server, Player player, Location from, Location to) {
+        lastLocation.set(to);
+        showEffectInternal(server, player, from, to);
+    }
 
     protected void sendEffect(Server server, Player source, Effect effect, Location loc, float dx, float dy, float dz, float v, float r, int count) {
         sendEffect(server, source, effect, loc, dx, dy, dz, v, r, count, 0, 0);

@@ -17,95 +17,88 @@ package org.cyberiantiger.minecraft.ducktrails;
 
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
-import static org.cyberiantiger.minecraft.ducktrails.EffectHandler.*;
 import static org.cyberiantiger.minecraft.ducktrails.MusicalEffectHandler.*;
 
 /**
  *
  * @author antony
  */
-public enum Trails {
+public enum Trail {
 
-    FLAME("ducktrails.trail.flame", "Leave a trail of flames") {
+    FLAME("ducktrails.trail.flame") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.FLAME, 0f, 0f, 0f, 0.02f, 1);
         }
     },
-    HEARTS("ducktrails.trail.hearts", "Leave a trail of hearts") {
+    HEARTS("ducktrails.trail.hearts") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.HEART, 0f, 1f, 0f, 0.2f, 0);
         }
     },
-    RUBY("ducktrails.trail.ruby", "Leave a trail of ruby colored dust") {
+    RUBY("ducktrails.trail.ruby") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.COLOURED_DUST, 1f, 0f, 0f, 1f, 0);
         }
     },
-    EMERALD("ducktrails.trail.emerald", "Leave a trail of emerald colored dust") {
+    EMERALD("ducktrails.trail.emerald") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.COLOURED_DUST, 0.0001f, 1f, 0f, 1f, 0);
         }
     },
-    SAPHIRE("ducktrails.trail.saphire", "Leave a trail of saphire colored dust") {
+    SAPPHIRE("ducktrails.trail.sapphire") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.COLOURED_DUST, 0.0001f, 0f, 1f, 1f, 0);
         }
     },
-    TOPAZ("ducktrails.trail.topaz", "Leave a trail of topaz colored dust") {
+    TOPAZ("ducktrails.trail.topaz") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.COLOURED_DUST, 1f, 1f, 0f, 1f, 0);
         }
     },
-    AMETHYST("ducktrails.trail.amethyst", "Leave a trail of amethyst colored dust") {
+    AMETHYST("ducktrails.trail.amethyst") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.COLOURED_DUST, 1f, 0f, 1f, 1f, 0);
         }
     },
-    DIAMOND("ducktrails.trail.diamond", "Leave a trail of diamond colored dust") {
+    DIAMOND("ducktrails.trail.diamond") {
         public EffectHandler createHandler(Player player) {
             return new BasicEffectHandler(Effect.COLOURED_DUST, 0.0001f, 1f, 1f, 1f, 0);
         }
     },
-    OPAL("ducktrails.trail.opal", "Leave a trail of rainbow colored dust") {
+    OPAL("ducktrails.trail.opal") {
         public EffectHandler createHandler(Player player) {
             return new RainbowEffectHandler(Effect.COLOURED_DUST);
         }
     },
-    NYAN("ducktrails.trail.nyan", "Leave a rainbow behind you like a Nyan Cat!") {
+    NYAN("ducktrails.trail.nyan") {
         public EffectHandler createHandler(Player player) {
             return new NyanEffectHandler(Effect.COLOURED_DUST);
         }
     },
-    PFUDOR("ducktrails.trail.pfudor", "Leave a pink trail behind you like a Pink Fluffy Unicorn!") {
+    PFUDOR("ducktrails.trail.pfudor") {
         public EffectHandler createHandler(Player player) {
             return new PFUDOREffectHandler(Effect.COLOURED_DUST);
         }
     },
-    DUCKTALE("ducktrails.trail.ducktale", "Leave a quackingly good duck tales trail!") {
+    DUCKTALES("ducktrails.trail.ducktales") {
         public EffectHandler createHandler(Player player) {
             return new DuckTalesEffectHandler(Effect.FIREWORKS_SPARK);
         }
     },
-    DRAGONBORN("ducktrails.trail.dragonborn", "Leave a dragonborn themed trail!") {
+    DRAGONBORN("ducktrails.trail.dragonborn") {
         public EffectHandler createHandler(Player player) {
             return new DragonbornEffectHandler(Effect.COLOURED_DUST);
         }
     };
 
     private final String permission;
-    private final String description;
 
-    private Trails(String permission, String description) {
+    private Trail(String permission) {
         this.permission = permission;
-        this.description = description;
     }
 
     public String getPermission() {
         return permission;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public abstract EffectHandler createHandler(Player player);
