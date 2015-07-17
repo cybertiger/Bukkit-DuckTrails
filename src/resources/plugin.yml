@@ -52,6 +52,7 @@ permissions:
       ducktrails.trail.pfudor: true
       ducktrails.trail.ducktales: true
       ducktrails.trail.dragonborn: true
+      ducktrails.trail.gameofthrones: true
   ducktrails.trail.hearts:
     default: op
     description: Allows usage of the hearts trail.
@@ -91,3 +92,7 @@ permissions:
   ducktrails.trail.dragonborn:
     default: op
     description: Allows usage of the dragonborn trail.
+  ducktrails.trail.gameofthrones:
+    default: op
+    description: Allows usage of the gameofthrones trail.
+

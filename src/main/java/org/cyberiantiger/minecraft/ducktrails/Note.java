@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.Copyright [yyyy] [name of copyright owner]
+ * limitations under the License.
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
@@ -20,7 +20,19 @@ package org.cyberiantiger.minecraft.ducktrails;
  * @author antony
  */
 public enum Note {
-    F_SHARP3,
+    F_SHARP2,
+    G2,
+    G_SHARP2,
+    A2,
+    A_SHARP2,
+    B2,
+    C3,
+    C_SHARP3,
+    D3,
+    D_SHARP3,
+    E3,
+    F3,
+    F_SHARP3, // Lowest note minecraft can play.
     G3,
     G_SHARP3,
     A3,
@@ -44,7 +56,7 @@ public enum Note {
     D_SHARP5,
     E5,
     F5,
-    F_SHARP5,
+    F_SHARP5, // Highest note minecraft can play.
     G5,
     G_SHARP5,
     A5,
@@ -61,7 +73,7 @@ public enum Note {
     private float pitch;
 
     private Note() {
-        this.pitch = (float) Math.pow(2, (ordinal() - 12) / 12d);
+        this.pitch = (float) Math.pow(2, (ordinal() - 24) / 12d);
     }
 
     public float pitch() {

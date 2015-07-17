@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.Copyright [yyyy] [name of copyright owner]
+ * limitations under the License.
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
@@ -88,6 +88,11 @@ public enum Trail {
     DRAGONBORN("ducktrails.trail.dragonborn") {
         public EffectHandler createHandler(Player player) {
             return new DragonbornEffectHandler(Effect.COLOURED_DUST);
+        }
+    },
+    GAMEOFTHRONES("ducktrails.trail.gameofthrones") {;
+        public EffectHandler createHandler(Player player) {
+            return new GameOfThronesEffectHandler();
         }
     };
 
