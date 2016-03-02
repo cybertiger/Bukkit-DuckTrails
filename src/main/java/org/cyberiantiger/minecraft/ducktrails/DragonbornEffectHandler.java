@@ -190,7 +190,7 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
             }
         }
     }
-    public static final Track DRAGONBORN_TRACK1 = new Track(Sound.NOTE_PIANO) {
+    public static final Track DRAGONBORN_TRACK1 = new Track(Sound.BLOCK_NOTE_HARP) {
         @Override
         public Note getNote(int offset) {
             return MELODY_DRAGONBORN1[offset % MELODY_DRAGONBORN1.length];
@@ -201,7 +201,7 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
             return 1f;
         }
     };
-    public static final Track DRAGONBORN_TRACK2 = new Track(Sound.NOTE_PIANO) {
+    public static final Track DRAGONBORN_TRACK2 = new Track(Sound.BLOCK_NOTE_HARP) {
         @Override
         public Note getNote(int offset) {
             return MELODY_DRAGONBORN2[offset % MELODY_DRAGONBORN2.length];

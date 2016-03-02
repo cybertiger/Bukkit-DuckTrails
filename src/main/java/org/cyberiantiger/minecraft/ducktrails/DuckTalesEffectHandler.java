@@ -83,7 +83,7 @@ public class DuckTalesEffectHandler extends MusicalEffectHandler {
             }
         }
     }
-    public static final Track DUCK_TALES_TRACK = new Track(Sound.NOTE_PIANO) {
+    public static final Track DUCK_TALES_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
         @Override
         public Note getNote(int offset) {
             return DUCK_TALES_MELODY[offset % DUCK_TALES_MELODY.length];

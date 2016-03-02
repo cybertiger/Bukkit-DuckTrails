@@ -85,7 +85,7 @@ public class GameOfThronesEffectHandler extends MusicalEffectHandler {
             }
         }
     }
-    public static final Track GAME_OF_THRONES_TRACK = new Track(Sound.NOTE_PIANO) {
+    public static final Track GAME_OF_THRONES_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
         @Override
         public Note getNote(int offset) {
             return GAME_OF_THRONES_MELODY[offset % GAME_OF_THRONES_MELODY.length];

@@ -50,7 +50,7 @@ public class NyanEffectHandler extends MusicalEffectHandler {
         B3, null, B3, A_SHARP3, B3, F_SHARP3, G_SHARP3, B3, E4, D_SHARP4, E4, F_SHARP4, B3, null, A_SHARP3, null,
         // Bar 11
         B3, null, B3, A_SHARP3, B3, F_SHARP3, G_SHARP3, B3, E4, D_SHARP4, E4, F_SHARP4, B4, C_SHARP4,};
-    public static final Track NYAN_CAT_MELODY_TRACK = new Track(Sound.NOTE_PIANO) {
+    public static final Track NYAN_CAT_MELODY_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
         @Override
         public Note getNote(int offset) {
             // LOOP to 3rd Bar (16 notes per bar)

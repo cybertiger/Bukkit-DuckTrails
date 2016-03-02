@@ -45,7 +45,7 @@ public class PFUDOREffectHandler extends MusicalEffectHandler {
         C4,
         null,
         null,};
-    public static final Track PFUDOR_MELODY_TRACK = new Track(Sound.NOTE_PIANO) {
+    public static final Track PFUDOR_MELODY_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
         @Override
         public Note getNote(int offset) {
             return PFUDOR_MELODY[offset % PFUDOR_MELODY.length];
