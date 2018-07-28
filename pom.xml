@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.cyberiantiger.minecraft</groupId>
   <artifactId>ducktrails</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.8-SNAPSHOT</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.number>${user.name}</project.build.number>
@@ -11,6 +11,7 @@
     <url>https://github.com/cybertiger/Bukkit-InstantReset/</url>
     <connection>scm:git:git://github.com/cybertiger/Bukkit-DuckTrails.git</connection>
     <developerConnection>scm:git:git@github.com:cybertiger/Bukkit-DuckTrails.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -28,6 +29,10 @@
           <source>1.6</source>
           <target>1.6</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.1</version>
       </plugin>
     </plugins>
     <extensions>
@@ -52,15 +57,8 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.8-R0.1-cyberiantiger</version>
+      <version>1.9-R0.1-cybertiger</version>
     </dependency>
-<!--
-    <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot</artifactId>
-      <version>1.8-R0.1-SNAPSHOT</version>
-    </dependency>
--->
   </dependencies>
   <distributionManagement>
     <repository>

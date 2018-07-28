@@ -1,3 +1,16 @@
+# Copyright 2015 Antony Riley
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 name: "DuckTrails"
 version: "${version}-${project.build.number}"
 main: "org.cyberiantiger.minecraft.ducktrails.Main"
@@ -8,10 +21,20 @@ commands:
         /dt list    - List available trails.
         /dt off     - Disable your trail.
         /dt <trail> - Enable the specified trail.
+        /dt reload  - Reload ducktrail's settings.
     aliases:
             - dt
             - ducktrail
 permissions:
+  ducktrails.*:
+    default: op
+    descripton: All ducktrails permissions.
+    children:
+      ducktrails.reload: true
+      ducktrails.trail.*: true
+  ducktrails.reload:
+    default: op
+    description: Allows reloading ducktrails.
   ducktrails.trail.*:
     default: op
     description: Allows usage of all trails.
@@ -20,13 +43,16 @@ permissions:
       ducktrails.trail.flame: true
       ducktrails.trail.ruby: true
       ducktrails.trail.emerald: true
-      ducktrails.trail.saphire: true
+      ducktrails.trail.sapphire: true
       ducktrails.trail.topaz: true
       ducktrails.trail.diamond: true
       ducktrails.trail.amethyst: true
       ducktrails.trail.opal: true
       ducktrails.trail.nyan: true
       ducktrails.trail.pfudor: true
+      ducktrails.trail.ducktales: true
+      ducktrails.trail.dragonborn: true
+      ducktrails.trail.gameofthrones: true
   ducktrails.trail.hearts:
     default: op
     description: Allows usage of the hearts trail.
@@ -39,9 +65,9 @@ permissions:
   ducktrails.trail.emerald:
     default: op
     description: Allows usage of the emerald trail.
-  ducktrails.trail.saphire:
+  ducktrails.trail.sapphire:
     default: op
-    description: Allows usage of the saphire trail.
+    description: Allows usage of the sapphire trail.
   ducktrails.trail.topaz:
     default: op
     description: Allows usage of the topaz trail.
@@ -60,3 +86,13 @@ permissions:
   ducktrails.trail.pfudor:
     default: op
     description: Allows usage of the pink fluffy unicorn trail.
+  ducktrails.trail.ducktales:
+    default: op
+    description: Allows usage of the ducktales trail.
+  ducktrails.trail.dragonborn:
+    default: op
+    description: Allows usage of the dragonborn trail.
+  ducktrails.trail.gameofthrones:
+    default: op
+    description: Allows usage of the gameofthrones trail.
+

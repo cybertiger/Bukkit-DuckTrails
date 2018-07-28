@@ -1,9 +1,21 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2015 Antony Riley
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
+import java.util.concurrent.atomic.AtomicReference;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -40,7 +52,7 @@ public abstract class EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
             sendEffect(server, player, effect, to, dx, dy, dz, v, 256f, count, id, data);
         }
     }
@@ -55,7 +67,7 @@ public abstract class EffectHandler {
         }
 
         @Override
-        public void showEffect(Server server, Player player, Location from, Location to) {
+        protected void showEffectInternal(Server server, Player player, Location from, Location to) {
             int argb =  java.awt.Color.HSBtoRGB(hue, 1f, 1f);
             float r = ((argb >> 16) & 0xff) / 255f;
             float g = ((argb >> 8) & 0xff) / 255f;
@@ -66,8 +78,19 @@ public abstract class EffectHandler {
             hue = hue >= 1f ? 0f : hue;
         }
     }
+    
+    private AtomicReference<Location> lastLocation = new AtomicReference<Location>(null);
 
-    public abstract void showEffect(Server server, Player player, Location from, Location to);
+    public Location getLastLocation() {
+        return lastLocation.get();
+    }
+
+    protected abstract void showEffectInternal(Server server, Player player, Location from, Location to);
+
+    public final void showEffect(Server server, Player player, Location from, Location to) {
+        lastLocation.set(to);
+        showEffectInternal(server, player, from, to);
+    }
 
     protected void sendEffect(Server server, Player source, Effect effect, Location loc, float dx, float dy, float dz, float v, float r, int count) {
         sendEffect(server, source, effect, loc, dx, dy, dz, v, r, count, 0, 0);
