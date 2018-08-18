@@ -15,10 +15,7 @@
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import static org.cyberiantiger.minecraft.ducktrails.Note.*;
 
@@ -50,7 +47,7 @@ public class NyanEffectHandler extends MusicalEffectHandler {
         B3, null, B3, A_SHARP3, B3, F_SHARP3, G_SHARP3, B3, E4, D_SHARP4, E4, F_SHARP4, B3, null, A_SHARP3, null,
         // Bar 11
         B3, null, B3, A_SHARP3, B3, F_SHARP3, G_SHARP3, B3, E4, D_SHARP4, E4, F_SHARP4, B4, C_SHARP4,};
-    public static final Track NYAN_CAT_MELODY_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
+    public static final Track NYAN_CAT_MELODY_TRACK = new Track(Sound.BLOCK_NOTE_BLOCK_HARP) {
         @Override
         public Note getNote(int offset) {
             // LOOP to 3rd Bar (16 notes per bar)
@@ -70,9 +67,9 @@ public class NyanEffectHandler extends MusicalEffectHandler {
         }
     };
 
-    private final Effect effect;
+    private final Particle effect;
 
-    public NyanEffectHandler(Effect effect) {
+    public NyanEffectHandler(Particle effect) {
         super(new Track[]{NYAN_CAT_MELODY_TRACK});
         this.effect = effect;
     }
@@ -80,13 +77,21 @@ public class NyanEffectHandler extends MusicalEffectHandler {
     @Override
     protected void showEffectInternal(Server server, Player player, Location from, Location to) {
         super.showEffectInternal(server, player, from, to);
-        for (int i = 0; i < 20; i++) {
+        double frequency = .3;
+
+        for (int i = 0; i < 32; i++) {
             int argb = java.awt.Color.HSBtoRGB(i / 20.0f, 1f, 1f);
             float r = ((argb >> 16) & 0xff) / 255f;
             float g = ((argb >> 8) & 0xff) / 255f;
             float b = (argb & 0xff) / 255f;
             r = r == 0f ? 0.001f : r;
-            sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 0);
+
+           double  red   = Math.sin(frequency*i + 0) * 127 + 128;
+           double     green = Math.sin(frequency*i + 2) * 127 + 128;
+           double     blue  = Math.sin(frequency*i + 4) * 127 + 128;
+
+            Object data = new Particle.DustOptions(Color.fromRGB((int)red,(int)green,(int)blue),.7f);
+            sendEffect(server, player, effect, to, b, g, r, 1f, 256f, 0,1,data);
             to.setY(to.getY() + 2 / 20d);
         }
     }

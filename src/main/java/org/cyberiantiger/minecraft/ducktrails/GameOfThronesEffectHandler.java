@@ -17,10 +17,8 @@ package org.cyberiantiger.minecraft.ducktrails;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.Sound;
+
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import static org.cyberiantiger.minecraft.ducktrails.Note.*;
@@ -85,7 +83,7 @@ public class GameOfThronesEffectHandler extends MusicalEffectHandler {
             }
         }
     }
-    public static final Track GAME_OF_THRONES_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
+    public static final Track GAME_OF_THRONES_TRACK = new Track(Sound.BLOCK_NOTE_BLOCK_HARP) {
         @Override
         public Note getNote(int offset) {
             return GAME_OF_THRONES_MELODY[offset % GAME_OF_THRONES_MELODY.length];
@@ -105,6 +103,8 @@ public class GameOfThronesEffectHandler extends MusicalEffectHandler {
     private double rotateX;
     private double rotateY;
     private double rotateZ;
+
+    private boolean bColor = true;
 
     public GameOfThronesEffectHandler() {
         super(new Track[]{GAME_OF_THRONES_TRACK});
@@ -143,16 +143,26 @@ public class GameOfThronesEffectHandler extends MusicalEffectHandler {
         Matrix3 m = Matrix3.rotateX(rotateX).multiply(Matrix3.rotateY(rotateY)).multiply(Matrix3.rotateZ(rotateZ));
         Location base = new Location(to.getWorld(), position.getX(), position.getY() + 1.5, position.getZ());
         for (Vector p : particleRing) {
-            translateEffect(server, player, base, Effect.COLOURED_DUST, p, 1.0f, 215f/255f, 0f, m);
+            //This was COLOURED_DUST. I can not find that anymore. I am not sure what it turned into.
+            Object data;
+            if(bColor) {
+                data = new Particle.DustOptions(Color.BLACK, .7f);
+                bColor = false;
+            }
+            else {
+                data = new Particle.DustOptions(Color.GRAY, .7f);
+                bColor = true;
+            }
+            translateEffect(server, player, base, Particle.REDSTONE, p, 1.0f, 215f/255f, 0f, m,data);
         }
     }
 
-    private void translateEffect(Server server, Player player, Location base, Effect effect, Vector offset, float r, float g, float b, Matrix3 m) {
+    private void translateEffect(Server server, Player player, Location base, Particle effect, Vector offset, float r, float g, float b, Matrix3 m,Object data) {
         base = base.clone();
         Vector realOffset = m.multiply(offset);
         base.setX(realOffset.getX() + base.getX());
         base.setY(realOffset.getY() + base.getY());
         base.setZ(realOffset.getZ() + base.getZ());
-        sendEffect(server, player, effect, base, r, g, b, 1f, 256f, 0);
+        sendEffect(server, player, effect, base, r, g, b, 1f, 256f, 0,1,data);
     }
 }

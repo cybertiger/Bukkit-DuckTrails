@@ -15,10 +15,7 @@
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import static org.cyberiantiger.minecraft.ducktrails.Note.*;
@@ -45,7 +42,7 @@ public class PFUDOREffectHandler extends MusicalEffectHandler {
         C4,
         null,
         null,};
-    public static final Track PFUDOR_MELODY_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
+    public static final Track PFUDOR_MELODY_TRACK = new Track(Sound.BLOCK_NOTE_BLOCK_HARP) {
         @Override
         public Note getNote(int offset) {
             return PFUDOR_MELODY[offset % PFUDOR_MELODY.length];
@@ -56,10 +53,10 @@ public class PFUDOREffectHandler extends MusicalEffectHandler {
             return 1f;
         }
     };
-    private final Effect effect;
+    private final Particle effect;
     double distance = 0.0D;
 
-    public PFUDOREffectHandler(Effect effect) {
+    public PFUDOREffectHandler(Particle effect) {
         super(new Track[]{PFUDOR_MELODY_TRACK});
         this.effect = effect;
     }
@@ -93,19 +90,29 @@ public class PFUDOREffectHandler extends MusicalEffectHandler {
                 pony.setX(baseX + Math.random());
                 pony.setY(baseY + Math.random());
                 pony.setZ(baseZ + Math.random());
-                sendEffect(server, player, Effect.POTION_SWIRL, pony, 1f, 0.7f, 0.7f, 1f, 256f, 0);
+                //Was Potion_Break
+                sendEffect(server, player, Particle.EXPLOSION_NORMAL, pony, 1f, 0.7f, 0.7f, 1f, 256f, 0);
             }
         }
         sideways.multiply(0.5D);
         to.subtract(sideways);
         sideways.multiply(1 / 8D);
+        double frequency = .3;
         for (int i = 0; i < 17; i++) {
             int argb = java.awt.Color.HSBtoRGB(i / 15.0f, 1f, 1f);
             float r = ((argb >> 16) & 0xff) / 255f;
             float g = ((argb >> 8) & 0xff) / 255f;
             float b = (argb & 0xff) / 255f;
             r = r == 0f ? 0.001f : r;
-            sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 0);
+
+
+            double  red   = Math.sin(frequency*i + 0) * 127 + 128;
+            double     green = Math.sin(frequency*i + 2) * 127 + 128;
+            double     blue  = Math.sin(frequency*i + 4) * 127 + 128;
+
+            Object data = new Particle.DustOptions(Color.fromRGB((int)red,(int)green,(int)blue),.7f);
+
+            sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 0,1,data);
             to.add(sideways);
         }
     }

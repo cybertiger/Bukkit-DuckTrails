@@ -15,7 +15,9 @@
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
+import org.bukkit.Color;
 import org.bukkit.Effect;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import static org.cyberiantiger.minecraft.ducktrails.MusicalEffectHandler.*;
 
@@ -27,67 +29,74 @@ public enum Trail {
 
     FLAME("ducktrails.trail.flame") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.FLAME, 0f, 0f, 0f, 0.02f, 1);
+            return new BasicEffectHandler(Particle.FLAME, 0f, 0f, 0f, 0.02f, 1);
         }
     },
     HEARTS("ducktrails.trail.hearts") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.HEART, 0f, 1f, 0f, 0.2f, 0);
+            return new BasicEffectHandler(Particle.HEART, 0f, 1f, 0f, 0.2f, 0);
         }
     },
     RUBY("ducktrails.trail.ruby") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.COLOURED_DUST, 1f, 0f, 0f, 1f, 0);
+            Object data = new Particle.DustOptions(Color.RED,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     EMERALD("ducktrails.trail.emerald") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.COLOURED_DUST, 0.0001f, 1f, 0f, 1f, 0);
+            Object data = new Particle.DustOptions(Color.GREEN,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     SAPPHIRE("ducktrails.trail.sapphire") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.COLOURED_DUST, 0.0001f, 0f, 1f, 1f, 0);
+            Object data = new Particle.DustOptions(Color.BLUE,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     TOPAZ("ducktrails.trail.topaz") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.COLOURED_DUST, 1f, 1f, 0f, 1f, 0);
+            Object data = new Particle.DustOptions(Color.YELLOW,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     AMETHYST("ducktrails.trail.amethyst") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.COLOURED_DUST, 1f, 0f, 1f, 1f, 0);
+            Object data = new Particle.DustOptions(Color.PURPLE,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     DIAMOND("ducktrails.trail.diamond") {
         public EffectHandler createHandler(Player player) {
-            return new BasicEffectHandler(Effect.COLOURED_DUST, 0.0001f, 1f, 1f, 1f, 0);
+            Object data = new Particle.DustOptions(Color.WHITE,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     OPAL("ducktrails.trail.opal") {
         public EffectHandler createHandler(Player player) {
-            return new RainbowEffectHandler(Effect.COLOURED_DUST);
+            Object data = new Particle.DustOptions(Color.AQUA,1);
+            return new BasicEffectHandler(Particle.REDSTONE, 1f,0f,0f,1f,1, data, 0);
         }
     },
     NYAN("ducktrails.trail.nyan") {
         public EffectHandler createHandler(Player player) {
-            return new NyanEffectHandler(Effect.COLOURED_DUST);
+            return new NyanEffectHandler(Particle.REDSTONE);
         }
     },
     PFUDOR("ducktrails.trail.pfudor") {
         public EffectHandler createHandler(Player player) {
-            return new PFUDOREffectHandler(Effect.COLOURED_DUST);
+            return new PFUDOREffectHandler(Particle.REDSTONE);
         }
     },
     DUCKTALES("ducktrails.trail.ducktales") {
         public EffectHandler createHandler(Player player) {
-            return new DuckTalesEffectHandler(Effect.FIREWORKS_SPARK);
+            return new DuckTalesEffectHandler(Particle.REDSTONE);
         }
     },
     DRAGONBORN("ducktrails.trail.dragonborn") {
         public EffectHandler createHandler(Player player) {
-            return new DragonbornEffectHandler(Effect.COLOURED_DUST);
+            return new DragonbornEffectHandler(Particle.REDSTONE);
         }
     },
     GAMEOFTHRONES("ducktrails.trail.gameofthrones") {;
