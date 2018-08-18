@@ -17,10 +17,8 @@ package org.cyberiantiger.minecraft.ducktrails;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.Sound;
+
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import static org.cyberiantiger.minecraft.ducktrails.Note.*;
@@ -190,7 +188,7 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
             }
         }
     }
-    public static final Track DRAGONBORN_TRACK1 = new Track(Sound.BLOCK_NOTE_HARP) {
+    public static final Track DRAGONBORN_TRACK1 = new Track(Sound.BLOCK_NOTE_BLOCK_HARP) {
         @Override
         public Note getNote(int offset) {
             return MELODY_DRAGONBORN1[offset % MELODY_DRAGONBORN1.length];
@@ -201,7 +199,7 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
             return 1f;
         }
     };
-    public static final Track DRAGONBORN_TRACK2 = new Track(Sound.BLOCK_NOTE_HARP) {
+    public static final Track DRAGONBORN_TRACK2 = new Track(Sound.BLOCK_NOTE_BLOCK_HARP) {
         @Override
         public Note getNote(int offset) {
             return MELODY_DRAGONBORN2[offset % MELODY_DRAGONBORN2.length];
@@ -212,14 +210,14 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
             return 1f;
         }
     };
-    private final Effect effect;
+    private final Particle effect;
     private final List<Vector> redCircle = new ArrayList<Vector>(20);
     private final List<Vector> blueCircle = new ArrayList<Vector>(20);
     private final Vector red = new Vector(1f, 0f, 0f);
     private final Vector blue = new Vector(0.01f, 0f, 1f);
     private double rotate = 0.0D;
 
-    public DragonbornEffectHandler(Effect effect) {
+    public DragonbornEffectHandler(Particle effect) {
         super(new Track[]{DRAGONBORN_TRACK1, DRAGONBORN_TRACK2});
         this.effect = effect;
         for (int i = 0; i < 20; i++) {
@@ -256,14 +254,16 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
         Vector xx = new Vector(cos * x.getX() - sin * y.getX(), cos * x.getY() - sin * y.getY(), cos * x.getZ() - sin * y.getZ());
         Vector yy = new Vector(sin * x.getX() + cos * y.getX(), sin * x.getY() + cos * y.getY(), sin * x.getZ() + cos * y.getZ());
         for (Vector v : redCircle) {
-            translateEffect(server, player, to, v, 1f, 0f, 0f, xx, yy, z);
+            Object data = new Particle.DustOptions(Color.RED,.7f);
+            translateEffect(server, player, to, v, 1f, 0f, 0f, xx, yy, z,data);
         }
         for (Vector v : blueCircle) {
-            translateEffect(server, player, to, v, 0.01f, 0f, 1f, xx, yy, z);
+            Object data = new Particle.DustOptions(Color.BLUE,.7f);
+            translateEffect(server, player, to, v, 0.01f, 0f, 1f, xx, yy, z,data);
         }
     }
 
-    private void translateEffect(Server server, Player player, Location base, Vector offset, float r, float g, float b, Vector x, Vector y, Vector z) {
+    private void translateEffect(Server server, Player player, Location base, Vector offset, float r, float g, float b, Vector x, Vector y, Vector z, Object data) {
         base = base.clone();
         Vector realOffset = new Vector(
                 offset.getX() * x.getX() + offset.getY() * y.getX() + offset.getZ() * z.getX(),
@@ -272,7 +272,7 @@ public class DragonbornEffectHandler extends MusicalEffectHandler {
         base.setX(realOffset.getX() + base.getX());
         base.setY(realOffset.getY() + base.getY());
         base.setZ(realOffset.getZ() + base.getZ());
-        sendEffect(server, player, effect, base, r, g, b, 1f, 256f, 0);
+        sendEffect(server, player, effect, base, r, g, b, 1f, 256f, 0,1,data);
     }
     
 }

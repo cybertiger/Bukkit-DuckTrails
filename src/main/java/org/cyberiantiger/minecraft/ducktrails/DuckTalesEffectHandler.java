@@ -15,10 +15,7 @@
  */
 package org.cyberiantiger.minecraft.ducktrails;
 
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import static org.cyberiantiger.minecraft.ducktrails.Note.*;
@@ -83,7 +80,7 @@ public class DuckTalesEffectHandler extends MusicalEffectHandler {
             }
         }
     }
-    public static final Track DUCK_TALES_TRACK = new Track(Sound.BLOCK_NOTE_HARP) {
+    public static final Track DUCK_TALES_TRACK = new Track(Sound.BLOCK_NOTE_BLOCK_HARP) {
         @Override
         public Note getNote(int offset) {
             return DUCK_TALES_MELODY[offset % DUCK_TALES_MELODY.length];
@@ -96,10 +93,10 @@ public class DuckTalesEffectHandler extends MusicalEffectHandler {
     };
     private final double cos45 = Math.cos(Math.PI / 4);
     private final double sin45 = Math.sin(Math.PI / 4);
-    private final Effect effect;
+    private final Particle effect;
     private double rotate = 0.0D;
 
-    public DuckTalesEffectHandler(Effect effect) {
+    public DuckTalesEffectHandler(Particle effect) {
         super(new Track[]{DUCK_TALES_TRACK});
         this.effect = effect;
     }
@@ -147,7 +144,8 @@ public class DuckTalesEffectHandler extends MusicalEffectHandler {
         base.setX(realOffset.getX() + base.getX());
         base.setY(realOffset.getY() + base.getY());
         base.setZ(realOffset.getZ() + base.getZ());
-        sendEffect(server, player, effect, base, (float) realVelocity.getX(), (float) realVelocity.getY(), (float) realVelocity.getZ(), 1f, 256f, 0);
+        Object data = new Particle.DustOptions(Color.ORANGE,.7f);
+        sendEffect(server, player, effect, base, (float) realVelocity.getX(), (float) realVelocity.getY(), (float) realVelocity.getZ(), 1f, 256f,0,1,data);
     }
     
 }

@@ -40,6 +40,8 @@ import java.util.TimerTask;
 import java.util.TreeSet;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -56,6 +58,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin implements Listener {
     public static final String LOCALE_FILE = "locale.properties";
+
+    public static Logger log;
 
     private class MusicRunnable extends TimerTask { 
         public void run() {
@@ -179,6 +183,8 @@ public class Main extends JavaPlugin implements Listener {
         timer = new Timer();
         timerTask = new MusicRunnable();
         timer.scheduleAtFixedRate(timerTask, 0L, 160L);
+
+        log = this.getLogger();
     }
 
     @Override

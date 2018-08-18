@@ -16,9 +16,8 @@
 package org.cyberiantiger.minecraft.ducktrails;
 
 import java.util.concurrent.atomic.AtomicReference;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Server;
+
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 /**
@@ -27,20 +26,20 @@ import org.bukkit.entity.Player;
  */
 public abstract class EffectHandler {
     public static class BasicEffectHandler extends EffectHandler {
-        private final Effect effect;
+        private final Particle effect;
         private final float dx;
         private final float dy;
         private final float dz;
         private final float v;
         private final int id;
-        private final int data;
+        private final Object data;
         private final int count;
 
-        public BasicEffectHandler(Effect effect, float dx, float dy, float dz, float v, int count) {
-            this(effect, dx, dy, dz, v, 0, 0, count);
+        public BasicEffectHandler(Particle effect, float dx, float dy, float dz, float v, int count) {
+            this(effect, dx, dy, dz, v, 0, null, count);
         }
 
-        public BasicEffectHandler(Effect effect, float dx, float dy, float dz, float v, int id, int data, int count) {
+        public BasicEffectHandler(Particle effect, float dx, float dy, float dz, float v, int id, Object data, int count) {
             this.effect = effect;
             this.dx = dx;
             this.dy = dy;
@@ -59,10 +58,10 @@ public abstract class EffectHandler {
 
     public static class RainbowEffectHandler extends EffectHandler {
         private float hue = 0f;
-        private final Effect effect;
+        private final Particle effect;
 
 
-        public RainbowEffectHandler(Effect effect) {
+        public RainbowEffectHandler(Particle effect) {
             this.effect = effect;
         }
 
@@ -73,7 +72,8 @@ public abstract class EffectHandler {
             float g = ((argb >> 8) & 0xff) / 255f;
             float b = (argb & 0xff) / 255f;
             r = r == 0f ? 0.001f : r;
-            sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 0);
+            Object data = new Particle.DustOptions(Color.fromRGB((int)r,(int)g,(int)b),(int)r);
+            sendEffect(server, player, effect, to, r, g, b, 1f, 256f, 1,1,data);
             hue = hue + 0.01f;
             hue = hue >= 1f ? 0f : hue;
         }
@@ -92,16 +92,23 @@ public abstract class EffectHandler {
         showEffectInternal(server, player, from, to);
     }
 
-    protected void sendEffect(Server server, Player source, Effect effect, Location loc, float dx, float dy, float dz, float v, float r, int count) {
-        sendEffect(server, source, effect, loc, dx, dy, dz, v, r, count, 0, 0);
+    protected void sendEffect(Server server, Player source, Particle effect, Location loc, float dx, float dy, float dz, float v, float r, int count) {
+        sendEffect(server, source, effect, loc, dx, dy, dz, v, r, count, 0, null);
     }
 
-    protected void sendEffect(Server server, Player source, Effect effect, Location loc, float dx, float dy, float dz, float v, float r, int count, int id, int data) {
+    protected void sendEffect(Server server, Player source, Particle effect, Location loc, float dx, float dy, float dz, float v, float r, int count, int id, Object data) {
         float r2 = r*r;
         for (Player p : server.getOnlinePlayers()) {
             if (p.getWorld() == loc.getWorld() && p.canSee(source)) {
                 if (loc.distanceSquared(p.getLocation()) < r2) {
-                    p.spigot().playEffect(loc, effect, id, data, dx, dy, dz, v, count, (int)r);
+                   //  v,
+                    if(data == null){
+                        p.getWorld().spawnParticle(effect, loc, count, dx, dy, dz);
+                    }
+                    else {
+                        p.getWorld().spawnParticle(effect, loc, count, dx, dy, dz, data);
+                    }
+                    //p.spigot().playEffect(loc, effect, id, data, dx, dy, dz, v, count, (int)r);
                 }
             }
         }
